@@ -49,7 +49,6 @@ class LinkController extends Controller
             // Si no se pudo crear, retornamos un mensaje
             return response()->json(['mensaje' => 'No se pudo cargar el link'], 500); // Cambié el código de estado a 500 para error interno
         }
-
         // Si se creó satisfactoriamente, deshabilitamos el anterior activo si existe
         if ($activo) {
             $activo->deshabilitado = true;

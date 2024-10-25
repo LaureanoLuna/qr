@@ -14,13 +14,12 @@ return new class extends Migration
         Schema::create('qrs', function (Blueprint $table) {
             $table->id();
             $table->boolean('isdinamico');
+            $table->string('nombre');
             $table->unsignedBigInteger('usuario_id');
             $table->timestamps();
 
             $table->foreign('usuario_id')->references('id')->on('users');
         });
-
-
     }
 
     /**

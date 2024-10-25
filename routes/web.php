@@ -9,9 +9,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/create', [QrController::class, 'store']);
 
-Route::get('/qr/{id}',[QrController::class,'show'])->name('qr.view');
+Route::get('/create', [QrController::class, 'create'])->name('qr.create');
+Route::post('/create', [QrController::class, 'store']);
+Route::get('/qr/{id}', [QrController::class, 'show'])->name('qr.view');
 
 
 Route::get('/dashboard', function () {

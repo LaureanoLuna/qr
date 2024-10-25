@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+#isDinamico,.input-create{
+    margin: 10px;
+}

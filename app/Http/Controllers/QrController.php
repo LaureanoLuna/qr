@@ -30,17 +30,19 @@ class QrController extends Controller
 
     public function store(Request $request)
     {
+        //dd($request);
         try {
             // Validamos los datos recibidos
             $request->validate([
-                'isdinamico' => ['required', 'boolean'],
                 'url' => ['required', 'string'],
             ]);
 
+
             // Creamos un nuevo QR
             $qr = Qr::create([
-                'isdinamico' => $request->isdinamico,
-                'usuario_id' => Auth::id() ?? 1,
+                'nombre' => $request->nombre,
+                'isdinamico' => $request->isdinamico == "on" ? true : false,
+                'usuario_id' => Auth::id() ?? 2,
             ]);
 
             // Verificamos si se creó el QR

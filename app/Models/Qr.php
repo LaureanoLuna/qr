@@ -11,6 +11,7 @@ class Qr extends Model
     protected $fillable = [
         'isdinamico',
         'usuario_id',
+        'nombre'
     ];
 
     public function links(): HasMany
