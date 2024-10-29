@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Qr;
 use App\Http\Controllers\LinkController;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 
 use Illuminate\Http\Request;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class QrController extends Controller
 {
@@ -86,10 +88,12 @@ class QrController extends Controller
                 'mensaje' => 'No se encontraron enlaces activos para este QR.'
             ], 404);
         }
+        $qrCode = QrCode::size(100)->generate($qr->links->first()->url);
 
-        return view('qr.view', compact('qr'));
+        return view('qr.view', compact('qr'))->with('qrCode', $qrCode);
     }
 
+    
     /**
      * Show the form for editing the specified resource.
      */

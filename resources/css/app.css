@@ -1,8 +1,12 @@
-@tailwind base;
+/* @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+ */
 
 #isDinamico,.input-create{
-    margin: 10px;
+    margin-top: 50px;
+}
+
+#img-qr{
+    margin: 5px;
 }
