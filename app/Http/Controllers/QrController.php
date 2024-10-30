@@ -6,6 +6,7 @@ use App\Models\Qr;
 use App\Http\Controllers\LinkController;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 
 use Illuminate\Http\Request;
@@ -93,7 +94,7 @@ class QrController extends Controller
         return view('qr.view', compact('qr'))->with('qrCode', $qrCode);
     }
 
-    
+
     /**
      * Show the form for editing the specified resource.
      */
@@ -116,5 +117,23 @@ class QrController extends Controller
     public function destroy(Qr $qr)
     {
         //
+    }
+
+    public function qrList()
+    {
+        $arrQrs = array();
+        $userAuth = Auth::id();
+
+        $qrList = Qr::with(['links' => function ($link) {
+            $link->where('deshabilitado', false);
+        }])->where('usuario_id', $userAuth)->get();
+
+        foreach ($qrList as $qr) {
+            array_push($arrQrs, [
+                'qrData' => $qr, 
+                'qrImg' => $qrCode = QrCode::size(150)->generate($qr->links->first()->url)]);
+        }
+
+        return view('qr.list', compact('arrQrs'));
     }
 }

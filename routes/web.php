@@ -25,6 +25,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/create', [QrController::class, 'create'])->name('qr.create');
     Route::post('/create', [QrController::class, 'store']);
     Route::get('/qr/{id}', [QrController::class, 'show'])->name('qr.view');
+    Route::get('/qr', [QrController::class, 'qrList'])->name('qr.list');
 });
 
 require __DIR__ . '/auth.php';

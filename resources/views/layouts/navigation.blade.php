@@ -11,12 +11,15 @@
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link href="create" :active="request()->routeIs('create')">
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex tracking-widest">
+                    <x-nav-link :href="route('qr.create')" :active="request()->routeIs('qr.create')">
                         {{ __('Home') }}
                     </x-nav-link>
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('qr.list')" :active="request()->routeIs('qr.list')">
+                        {{ __('Mis Qrs') }}
                     </x-nav-link>
                 </div>
             </div>
