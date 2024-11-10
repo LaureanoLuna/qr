@@ -1,3 +1,8 @@
+@import "../../node_modules/@fortawesome/fontawesome-free/css/fontawesome.css";
+@import "../../node_modules/@fortawesome/fontawesome-free/css/regular.css";
+@import "../../node_modules/@fortawesome/fontawesome-free/css/brands.css";
+@import "../../node_modules/@fortawesome/fontawesome-free/css/solid.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -13,19 +18,14 @@
 }
 
 #btn-descarga-qr {
-    border: solid 1px lightgray !important;
-    width: 60px !important;
-    border-radius: 5px !important;
-    background-color: lightgray !important;
-    color: gray !important;
-    text-align: center !important;
-    align-content: center !important;
+    border: solid 1px rgb(1, 93, 199) ;
+    border-radius: 5px ;
+    background-color: transparent ;
+    text-align: center ;
+    align-content: center ;
 }
 
 #btn-descarga-qr:hover {
-    background-color: green !important;
-    color: white !important;
-    font-weight: 700 !important;
+    background-color: green ;
+    color: white ;
 }
-
-/*  */

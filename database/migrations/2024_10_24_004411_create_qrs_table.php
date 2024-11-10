@@ -16,6 +16,7 @@ return new class extends Migration
             $table->boolean('isdinamico');
             $table->string('nombre');
             $table->unsignedBigInteger('usuario_id');
+            $table->boolean('deshabilitado')->default(false);
             $table->timestamps();
 
             $table->foreign('usuario_id')->references('id')->on('users');
