@@ -1,12 +1,31 @@
-/* @tailwind base;
+@tailwind base;
 @tailwind components;
 @tailwind utilities;
- */
 
-#isDinamico,.input-create{
+
+#isDinamico,
+.input-create {
     margin-top: 50px;
 }
 
-#img-qr{
+#img-qr {
     margin: 5px;
 }
+
+#btn-descarga-qr {
+    border: solid 1px lightgray !important;
+    width: 60px !important;
+    border-radius: 5px !important;
+    background-color: lightgray !important;
+    color: gray !important;
+    text-align: center !important;
+    align-content: center !important;
+}
+
+#btn-descarga-qr:hover {
+    background-color: green !important;
+    color: white !important;
+    font-weight: 700 !important;
+}
+
+/*  */

@@ -80,19 +80,50 @@ class QrController extends Controller
 
     public function show($id)
     {
-        $qr = Qr::with(['links' => function ($query) {
-            $query->where('deshabilitado', false);
-        }])->find($id);
-
-        if (!$qr || $qr->links->isEmpty()) {
-            return response()->json([
-                'mensaje' => 'No se encontraron enlaces activos para este QR.'
-            ], 404);
+        // Buscar el QR con enlaces activos
+        $qr = $this->getQrWithActiveLinks($id);
+    
+        // Verificar si se encontró el QR y si tiene enlaces activos
+        if (!$qr) {
+            return $this->responseNotFound();
         }
-        $qrCode = QrCode::size(100)->generate($qr->links->first()->url);
-
+    
+        // Generar el código QR
+        $qrCode = $this->generateQrCode($qr->links->first()->url, $qr->id);
+    
+        // Retornar la vista con el QR y el código generado
         return view('qr.view', compact('qr'))->with('qrCode', $qrCode);
     }
+    
+    private function getQrWithActiveLinks($id)
+    {
+        return Qr::with(['links' => function ($query) {
+            $query->where('deshabilitado', false);
+        }])->find($id);
+    }
+    
+    private function responseNotFound()
+    {
+        return response()->json([
+            'mensaje' => 'No se encontraron enlaces activos para este QR.'
+        ], 404);
+    }
+    
+    private function generateQrCode($url, $qrId)
+   {
+       $path = public_path('qr/' . $qrId . '.png');
+
+       // Verificar si el directorio existe, si no, crearlo
+       if (!file_exists(dirname($path))) {
+           mkdir(dirname($path), 0755, true);
+       }
+
+       return QrCode::format('png')
+           ->encoding('UTF-8')
+           ->errorCorrection('H')
+           ->size(200)
+           ->generate($url, $path);
+   }
 
 
     /**
@@ -130,8 +161,11 @@ class QrController extends Controller
 
         foreach ($qrList as $qr) {
             array_push($arrQrs, [
-                'qrData' => $qr, 
-                'qrImg' => $qrCode = QrCode::size(150)->generate($qr->links->first()->url)]);
+                'qrData' => $qr,
+                'qrImg' => $qrCode = QrCode::errorCorrection('H')
+                    ->size(150)
+                    ->generate($qr->links->first()->url)
+            ]);
         }
 
         return view('qr.list', compact('arrQrs'));

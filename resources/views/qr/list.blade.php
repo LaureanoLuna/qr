@@ -25,13 +25,15 @@
 
             </div>
         </div>
-        <div class="flex">
-            <x-nav-link style="border: solid 1px lightgray; width: 80px; border-radius: 5px; background-color: lightgray; color: gray;text-align: center;">
-                DWN
-            </x-nav-link>
-            <div style="display: flex; flex-direction: column;justify-content: space-evenly ;text-transform: uppercase; height:100px;width: 100px; margin-left: 10px; margin-right: 20px;">
-                <x-nav-link :href="route('qr.create')" style="border: 1px solid lightyellow; border-radius: 5px; padding: 1px 3px;  text-transform: uppercase; width: 100%;text-align: center;">update</x-nav-link>
-                <x-nav-link style="border: 1px solid red; border-radius: 5px; padding: 2px 5px;  text-transform: uppercase; width: 100%;text-align: center; ">delete</x-nav-link>
+        <div class="grid grid-cols-2">
+
+            <a id="btn-descarga-qr" href="{{ asset('qr/' . $qr['qrData']->id) }}.png" class="btn btn-primary" download="qr-{{ $qr['qrData']->id }}.png" style="border: solid 1px lightgray; border-radius: 5px; background-color: lightgray; color: gray;text-align: center; align-content: center;">
+                descargar
+            </a>
+
+            <div style="display: grid;gap: 5px; text-transform: uppercase; height:100px;width: 100px; margin-left: 10px; margin-right: 20px;">
+                <a href="route('qr.create')" style="border: solid 1px lightgreen; border-radius: 5px; background-color: transparent; color: lightgreen;text-align: center; align-content: center; text-transform: uppercase; ">update</a>
+                <button style="border: solid 1px orangered; border-radius: 5px; background-color: transparent; color: orangered;text-align: center; align-content: center; text-transform: uppercase; ">delete</button>
             </div>
         </div>
     </div>
