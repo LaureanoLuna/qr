@@ -92,7 +92,7 @@ class QrController extends Controller
 
         // Generar el código QR
         $url = URL::current();
-        $this->generateQrCode($url, $qr->id);
+        $this->generateQrCode('http://localhost/qr/link/' . $qr->id, $qr->id);
 
         // Retornar la vista con el QR y el código generado
         return view('qr.view', compact('qr'))->with('qrCode', QrCode::errorCorrection('H')->size(150)->generate($qr->links->first()->url));
@@ -202,6 +202,6 @@ class QrController extends Controller
 
         $link = $qr->links->first()->url;
 
-        return redirect($link);
+        return Redirect::to($link);
     }
 }
