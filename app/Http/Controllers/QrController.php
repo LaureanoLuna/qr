@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\URL;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class QrController extends Controller
@@ -90,7 +91,8 @@ class QrController extends Controller
         }
 
         // Generar el código QR
-        $this->generateQrCode($qr->links->first()->url, $qr->id);
+        $url = URL::current();
+        $this->generateQrCode($url, $qr->id);
 
         // Retornar la vista con el QR y el código generado
         return view('qr.view', compact('qr'))->with('qrCode', QrCode::errorCorrection('H')->size(150)->generate($qr->links->first()->url));
@@ -192,5 +194,14 @@ class QrController extends Controller
         }
 
         return view('qr.list', compact('arrQrs'));
+    }
+
+    public function goLink($uuid)
+    {
+        $qr = $this->getQrWithActiveLinks($uuid);
+
+        $link = $qr->links->first()->url;
+
+        return redirect($link);
     }
 }
