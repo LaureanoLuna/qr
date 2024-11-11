@@ -20,6 +20,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/create', [QrController::class, 'create'])->name('qr.create');
     Route::post('/create', [QrController::class, 'store']);
+    Route::get('/edit/{id}', [QrController::class, 'edit']);
     Route::get('/qr/{id}', [QrController::class, 'show'])->name('qr.view');
     Route::get('/qrs', [QrController::class, 'qrList'])->name('qr.list');
     Route::delete('/destroy', [QrController::class, 'destroy'])->name('qr.destroy');

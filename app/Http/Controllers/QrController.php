@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class QrController extends Controller
@@ -89,10 +90,10 @@ class QrController extends Controller
         }
 
         // Generar el código QR
-        $qrCode = $this->generateQrCode($qr->links->first()->url, $qr->id);
+        $this->generateQrCode($qr->links->first()->url, $qr->id);
 
         // Retornar la vista con el QR y el código generado
-        return view('qr.view', compact('qr'))->with('qrCode', $qrCode);
+        return view('qr.view', compact('qr'))->with('qrCode', QrCode::errorCorrection('H')->size(150)->generate($qr->links->first()->url));
     }
 
     private function getQrWithActiveLinks($id)
@@ -129,9 +130,15 @@ class QrController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Qr $qr)
+    public function edit($id)
     {
-        //
+        $qr = $this->getQrWithActiveLinks($id);
+
+        if (!$qr) {
+            return $this->responseNotFound();
+        }
+
+        return view('qr.edit', compact('qr'));
     }
 
     /**
@@ -162,6 +169,8 @@ class QrController extends Controller
 
         $qr->deshabilitado = !$qr->deshabilitado;
         $qr->save();
+
+        return Redirect::route('qr.list')->with('status', 'Realizado correctamente!!');
     }
 
     public function qrList()

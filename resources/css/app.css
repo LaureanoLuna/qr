@@ -8,10 +8,7 @@
 @tailwind utilities;
 
 
-#isDinamico,
-.input-create {
-    margin-top: 50px;
-}
+
 
 #img-qr {
     margin: 5px;

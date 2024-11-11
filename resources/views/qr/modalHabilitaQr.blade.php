@@ -20,7 +20,7 @@
         </p>
 
         <div class="mt-6">
-            <input type="text" value="{{$qrID}}" name="qrId">
+            <input type="text" value="{{$qrID}}" name="qrId" hidden>
             <x-input-label for="password" value="{{ __('Password') }}" class="sr-only" />
 
             <x-text-input

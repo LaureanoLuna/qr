@@ -1,8 +1,8 @@
 <x-app-layout>
-    <div class=" flex flex-col sm:justify-center items-center m-52  bg-gray-100 dark:bg-gray-900">
+    <div class=" flex flex-col sm:justify-center items-center bg-gray-100 dark:bg-gray-900">
         <x-slot name="header">
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                {{ __('Crear Qr') }}
+                {{ __('Nuevo Qr') }}
             </h2>
         </x-slot>
         <div class="mt-10" style="margin-top: 50px;">
@@ -19,11 +19,11 @@
                     <x-input-error :messages="$errors->get('nombre')" class="mt-2" />
                 </div>
                 <div class="input-create" style="margin: 10px 0px ;">
-                    <x-input-label for="url" :value="__('Link del Qr')" class="my-6" />
+                    <x-input-label for="url" :value="__('Link del Qr')" class="mt-2 mb-2" />
                     <x-text-input id="url" class="block mt-1 w-full" type="text" name="url" :value="old('url')" required autofocus autocomplete="url" />
                     <x-input-error :messages="$errors->get('nombre')" class="mt-2" />
                 </div>
-                <x-input-radio id="isDinamico" name="isDinamico" label="¿Es Dinamico?" class="p-10" style="margin: 10px;" />
+                <x-input-radio id="isDinamico" name="isDinamico" label="¿Es Dinamico?"  />
 
                 <div class="flex justify-end items-center">
                     <x-secondary-button type="submit">
