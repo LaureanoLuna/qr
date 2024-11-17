@@ -2,27 +2,8 @@
 @import "../../node_modules/@fortawesome/fontawesome-free/css/regular.css";
 @import "../../node_modules/@fortawesome/fontawesome-free/css/brands.css";
 @import "../../node_modules/@fortawesome/fontawesome-free/css/solid.css";
+@import "./style.css";
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-
-
-
-#img-qr {
-    margin: 5px;
-}
-
-#btn-descarga-qr {
-    border: solid 1px rgb(1, 93, 199) ;
-    border-radius: 5px ;
-    background-color: transparent ;
-    text-align: center ;
-    align-content: center ;
-}
-
-#btn-descarga-qr:hover {
-    background-color: green ;
-    color: white ;
-}

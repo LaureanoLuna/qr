@@ -1,3 +1,120 @@
+#img-qr {
+    margin: 5px;
+}
 
+#btn-descarga-qr {
+    border: solid 1px rgb(1, 93, 199);
+    border-radius: 5px;
+    background-color: transparent;
+    text-align: center;
+    align-content: center;
+}
 
+#btn-descarga-qr:hover {
+    background-color: green;
+    color: white;
+}
 
+.type {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#personalizacion-avanzada .desplegable-avanzada {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px white;
+}
+
+#icono-desplegable-avanzada {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 10%;
+}
+
+#icono-desplegable-avanzada i:hover {
+    cursor: pointer;
+    background-color: gray;
+}
+
+#config-avanzada-personalizacion {
+    padding-bottom: 10px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 5px;
+}
+
+#config-avanzada-personalizacion span input[type="text"],
+#selectEstilo {
+    width: 100%;
+}
+
+#config-avanzada-personalizacion .inputTamanio {
+    grid-column-start: 1;
+}
+#config-avanzada-personalizacion,
+.inputEstilo {
+    grid-column-start: 2;
+    grid-column-end: 5;
+}
+
+#coloinputColorQrrQr {
+    grid-column-start: 1;
+    grid-column-end: 2;
+}
+#inputColorFondo {
+    grid-column-start: 3;
+}
+
+#contentImgConf,
+#contentCheckTypeFondo {
+    grid-column-start: 1;
+    grid-column-end: 5;
+    padding: 5px 2px;
+}
+
+#checkTypeFondo{
+    display: flex;
+    justify-content: space-evenly;
+}
+.open {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+}
+
+.hidden {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+}
+
+.open {
+    animation: desplegaInputAvansada 0.5s forwards;
+}
+
+#input-tamaño {
+    position: relative;
+}
+
+#input-tamaño input::before {
+    position: absolute;
+    content: "px";
+    top: 0px;
+    left: 0px;
+    background-color: white;
+}
+
+@keyframes desplegaInputAvansada {
+    from {
+        opacity: 0;
+        transform: translateY(-10px); /* Ejemplo de movimiento */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

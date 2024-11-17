@@ -1,8 +1,13 @@
 @props(['label'])
+@props(['name'])
+@props(['idElement'])
+@props(['valueInput'])
 
-<div {{$attributes->merge(["class"=>"flex justify-start gap-2 items-center m-1"])}}>
-    <input type="checkbox" name="isdinamico" id="isdinamico" class="rounded-md ">
-    <x-input-label for="isdinamico">
+
+
+<div {{$attributes->merge(["class"=>" m-1 border w-full py-3 rounded-md hover:bg-gray-700 hover:cursor-pointer"])}}>
+    <input type="radio" name="{{$name}}" id="{{$idElement}}" class="rounded-md " value="{{$valueInput}}">
+    <x-input-label for="{{$name}}">
         {{$label}}
     </x-input-label>
 

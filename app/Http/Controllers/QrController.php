@@ -90,10 +90,11 @@ class QrController extends Controller
             return $this->responseNotFound();
         }
 
-        // Generar el código QR
+        /*  // Generar el código QR
         $url = URL::current();
         $this->generateQrCode('http://localhost/qr/link/' . $qr->id, $qr->id);
-
+         */
+        
         // Retornar la vista con el QR y el código generado
         return view('qr.view', compact('qr'))->with('qrCode', QrCode::errorCorrection('H')->size(150)->generate($qr->links->first()->url));
     }
