@@ -60,13 +60,6 @@
     grid-column-end: 5;
 }
 
-#coloinputColorQrrQr {
-    grid-column-start: 1;
-    grid-column-end: 2;
-}
-#inputColorFondo {
-    grid-column-start: 3;
-}
 
 #contentImgConf,
 #contentCheckTypeFondo {
@@ -75,7 +68,7 @@
     padding: 5px 2px;
 }
 
-#checkTypeFondo{
+#checkTypeFondo {
     display: flex;
     justify-content: space-evenly;
 }
@@ -86,7 +79,7 @@
     transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
 }
 
-.hidden {
+.invisible {
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
@@ -106,6 +99,21 @@
     top: 0px;
     left: 0px;
     background-color: white;
+}
+
+#content-color-qr {
+    grid-column-start: 1;
+    grid-column-end: 5;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 4px;
+    padding: 5px;
+}
+
+#content-color-qr > div{
+    padding: 2px;
+    border: none;
 }
 
 @keyframes desplegaInputAvansada {

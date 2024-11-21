@@ -17,11 +17,11 @@ if (document.readyState === "loading") {
 }
 
 export const indexJs = async () => {
-     radioSelectTypeBackgroun.children[0]
+     radioSelectTypeBackgroun?.children[0]
         .querySelector("input")
         .setAttribute("checked", true);
 
-    buttonDesplegablePersonalizacionAvanzada.addEventListener("click", () => {
+    buttonDesplegablePersonalizacionAvanzada?.addEventListener("click", () => {
         if (buttonDesplegablePersonalizacionAvanzada) {
             let a = buttonDesplegablePersonalizacionAvanzada.children;
             // Convertir HTMLCollection a array
@@ -36,8 +36,8 @@ export const indexJs = async () => {
         }
     });
 
-    if (radioSelectTypeBackgroun !== undefined) {
-        let nodes =  radioSelectTypeBackgroun.children;
+    if (radioSelectTypeBackgroun) {
+        let nodes =  radioSelectTypeBackgroun?.children;
         Array.from(nodes).forEach((e) => {
             e.addEventListener("click", selectRadioTipeBackground);
         });

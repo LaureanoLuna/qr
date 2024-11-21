@@ -5,11 +5,7 @@
                 {{ __('Nuevo Qr') }}
             </h2>
         </x-slot>
-        <div class="mt-10" style="margin-top: 50px;">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
-        </div>
+
         <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
             <form action="{{route('qr.create')}}" method="POST">
                 @csrf
@@ -47,10 +43,14 @@
                         </span>
                     </div>
                     <div id="config-avanzada-personalizacion">
-                        <span id="input-tamaño" class="inputTamanio">
-                            <x-input-label for="tamanio" :value="__('Tamaño')" class="my-2 " />
-                            <x-text-input type="text" name="tamanio" />
-                        </span>
+                        <div>
+                            <x-input-label for="tamanio" :value="__('Tamaño')" class="mt-2 mb-2" />
+                            <x-select label='tamanio' name="tamanio" idElement="tamanio" required class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
+                                <option value="link">chico</option>
+                                <option value="email">mediano</option>
+                                <option value="geo">grande</option>
+                            </x-select>
+                        </div>
                         <span class="inputEstilo">
                             <x-input-label for="estilo" :value="__('Estilo')" class="my-2 " />
                             <x-select idElement="selectEstilo" type="text" name='estilo'>
@@ -58,10 +58,6 @@
                                 <option value="dot">Punto</option>
                                 <option value="round">Redonda</option>
                             </x-select>
-                        </span>
-                        <span id="contentImgConf">
-                            <x-input-label for="imgCentral" :value="__('Imagen Central')" class="my-2 " />
-                            <x-text-input type="file" name="imgCentral" />
                         </span>
                         <span class="inputColor" id="contentCheckTypeFondo">
                             <x-input-label for="nombre" :value="__('Tipo Fondo')" class="my-2 " />
@@ -71,9 +67,14 @@
                             </div>
 
                         </span>
-                        <x-input-color class="inputColor" name="colorQr" idElement="inputColorQr" label='Color' />
-                        <x-input-color class="inputColor" name="colorFondo" idElement="inputColorFondo" label='Color Fondo' />
-
+                        <div id="content-color-qr">
+                            <x-input-color class="inputColor" name="colorQr" idElement="inputColorQr" label='Color' />
+                            <x-input-color class="inputColor" name="colorFondo" idElement="inputColorFondo" label='Color Fondo' />
+                        </div>
+                        <span id="contentImgConf">
+                            <x-input-label for="imgCentral" :value="__('Imagen Central')" class="my-2 " />
+                            <x-text-input type="file" name="imgCentral" />
+                        </span>
                     </div>
                 </div>
                 <div class="flex justify-end items-center">
