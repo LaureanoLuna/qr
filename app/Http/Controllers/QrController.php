@@ -40,15 +40,37 @@ class QrController extends Controller
             // Validamos los datos recibidos
             $request->validate([
                 'url' => ['required', 'string'],
+                'nombre' => ['required', 'string']
             ]);
 
 
-            // Creamos un nuevo QR
-            $qr = Qr::create([
-                'nombre' => $request->nombre,
-                'isdinamico' => $request->isdinamico == "on" ? true : false,
-                'usuario_id' => Auth::id() ?? 2,
-            ]);
+          /*   $request->validate([
+                'nombre' => 'required|string|max:255',
+                'isdinamico' => 'boolean',
+                'tipo' => 'required|string',
+                'tamanio' => 'required|string',
+                'color' => 'required|string',
+                'fondo' => 'required|string',
+                'tipoFondo' => 'required|string',
+                'file.imgCentral' => 'nullable|image|max:2048', // Asegúrate de que sea una imagen
+            ]); */
+
+            try {
+                $qr = Qr::create([
+                    'nombre' => $request->nombre,
+                    'isdinamico' => $request->isdinamico === "on",
+                    'tipo' => $request->tipo,
+                    'tamanio' => $request->tamanio,
+                    'color' => $request->color,
+                    'fondo' => $request->fondo,
+                    'tipoFondo' => $request->tipoFondo,
+                    //'img' => $request->file('imgCentral')->store('images') ?? null, // Guarda la imagen
+                    'usuario_id' => Auth::id() ?? 2,
+                ]);
+            } catch (\Exception $e) {
+                // Manejo de errores, por ejemplo, registrar el error o devolver una respuesta adecuada
+                return response()->json(['error' => $e], 500);
+            }
 
             // Verificamos si se creó el QR
             if ($qr) {
@@ -94,7 +116,7 @@ class QrController extends Controller
         $url = URL::current();
         $this->generateQrCode('http://localhost/qr/link/' . $qr->id, $qr->id);
          */
-        
+
         // Retornar la vista con el QR y el código generado
         return view('qr.view', compact('qr'))->with('qrCode', QrCode::errorCorrection('H')->size(150)->generate($qr->links->first()->url));
     }

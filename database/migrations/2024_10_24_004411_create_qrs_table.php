@@ -12,9 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('qrs', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->boolean('isdinamico');
             $table->string('nombre');
+            $table->string('tipo');
+            $table->string('tamanio');
+            $table->string('color');
+            $table->string('fondo');
+            $table->string('tipoFondo');
+            $table->string('img')->nullable();
             $table->unsignedBigInteger('usuario_id');
             $table->boolean('deshabilitado')->default(false);
             $table->timestamps();

@@ -2,14 +2,22 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Qr extends Model
 {
+    use HasUuids;
     protected $fillable = [
         'isdinamico',
+        'tipo',
+        'tamanio',
+        'color',
+        'fondo',
+        'tipoFondo',
+        'img',
         'usuario_id',
         'nombre'
     ];

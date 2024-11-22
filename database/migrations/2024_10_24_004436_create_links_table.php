@@ -13,12 +13,11 @@ return new class extends Migration
     {
         Schema::create('links', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('qr_id');
             $table->string('url');
             $table->boolean('deshabilitado')->default(false);
             $table->timestamps();
 
-            $table->foreign('qr_id')->references('id')->on('qrs');
+            $table->foreignUlid('qr_id',255)->references('id')->on('qrs');
         });
     }
 

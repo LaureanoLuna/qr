@@ -13,13 +13,12 @@ return new class extends Migration
     {
         Schema::create('vistas', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('qr_id');
             $table->unsignedBigInteger('link_id');
             $table->string('locacion');
             $table->timestamps();
 
             $table->foreign('link_id')->references('id')->on('links');
-            $table->foreign('qr_id')->references('id')->on('qrs');
+            $table->foreignUuid('qr_id')->references('id')->on('qrs');
 
         });
     }

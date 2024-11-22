@@ -7,7 +7,7 @@
         </x-slot>
 
         <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
-            <form action="{{route('qr.create')}}" method="POST">
+            <form action="{{route('qr.create')}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="input-create" style="margin: 10px 0px ;">
                     <x-input-label for="nombre" :value="__('Nombre')" class="mt-2 mb-2" />
@@ -16,9 +16,9 @@
                 </div>
                 <div class="input-create type" style="margin: 10px 0px ;">
                     <div>
-                        <x-input-label for="typeQr" :value="__('Tipo')" class="mt-2 mb-2" />
+                        <x-input-label for="tipo" :value="__('Tipo')" class="mt-2 mb-2" />
 
-                        <x-select label='typeQr' name="typeQr" idElement="typeQr" required class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
+                        <x-select label='tipo' name="tipo" idElement="tipo" required class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
                             <option value="link">Url</option>
                             <option value="email">Email</option>
                             <option value="geo">Geo</option>
@@ -42,13 +42,13 @@
                             <i class="fa-solid fa-angle-up hidden"></i>
                         </span>
                     </div>
-                    <div id="config-avanzada-personalizacion">
+                    <div id="config-avanzada-personalizacion invisible">
                         <div>
                             <x-input-label for="tamanio" :value="__('Tamaño')" class="mt-2 mb-2" />
                             <x-select label='tamanio' name="tamanio" idElement="tamanio" required class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
-                                <option value="link">chico</option>
-                                <option value="email">mediano</option>
-                                <option value="geo">grande</option>
+                                <option value="small">chico</option>
+                                <option value="medium">mediano</option>
+                                <option value="large">grande</option>
                             </x-select>
                         </div>
                         <span class="inputEstilo">
@@ -62,14 +62,13 @@
                         <span class="inputColor" id="contentCheckTypeFondo">
                             <x-input-label for="nombre" :value="__('Tipo Fondo')" class="my-2 " />
                             <div id="checkTypeFondo">
-                                <x-input-radio label="solido" idElement='radioSolido' name="checkTypeFondo" valueInput="solido" />
-                                <x-input-radio label="gradiente" idElement='radioGradiente' name="checkTypeFondo" valueInput="gradiente" />
+                                <x-input-radio label="solido" idElement='radioSolido' name="tipoFondo" valueInput="solido" />
+                                <x-input-radio label="gradiente" idElement='radioGradiente' name="tipoFondo" valueInput="gradiente" />
                             </div>
-
                         </span>
                         <div id="content-color-qr">
-                            <x-input-color class="inputColor" name="colorQr" idElement="inputColorQr" label='Color' />
-                            <x-input-color class="inputColor" name="colorFondo" idElement="inputColorFondo" label='Color Fondo' />
+                            <x-input-color class="inputColor" name="color" idElement="inputColorQr" label='Color' defaultValor="#000000" />
+                            <x-input-color class="inputColor" name="fondo" idElement="inputColorFondo" label='Color Fondo' defaultValor="#ffffff" />
                         </div>
                         <span id="contentImgConf">
                             <x-input-label for="imgCentral" :value="__('Imagen Central')" class="my-2 " />
