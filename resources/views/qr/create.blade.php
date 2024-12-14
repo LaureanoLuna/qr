@@ -6,12 +6,13 @@
             </h2>
         </x-slot>
 
+        {{$qr?? ""}}
         <div class="w-full sm:max-w-2xl mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
             <form action="{{route('qr.create')}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="input-create" style="margin: 10px 0px ;">
                     <x-input-label for="nombre" :value="__('Nombre')" class="mt-2 mb-2" />
-                    <x-text-input id="nombre" class="block mt-1 w-full" type="text" name="nombre" :value="old('nombre')" required autofocus autocomplete="nombre" />
+                    <x-text-input id="nombre" class="block mt-1 w-full" type="text" name="nombre" :value="old('nombre')" value="{{$qr->nombre ?? ''}}" required autofocus autocomplete="nombre" />
                     <x-input-error :messages="$errors->get('nombre')" class="mt-2" />
                 </div>
                 <div class=" flex items-center justify-between gap-2" style="margin: 10px 0px ;">
@@ -19,21 +20,21 @@
                         <x-input-label for="tipo" :value="__('Tipo')" class="mt-2 mb-2" />
 
                         <x-select label='tipo' name="tipo" idElement="tipo" required :value="old('tipo')" class="w-full uppercase border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
-                            <option value="link">Url</option>
-                            <option value="email">Email</option>
-                            <option value="geo">Geo</option>
-                            <option value="llamada">Llamar</option>
-                            <option value="sms">SMS</option>
-                            <option value="wifi">Wifi</option>
+                            <option value="link" {{$qr->tipo == 'link' ? 'selected' : ''}} >Url</option>
+                            <option value="email" {{$qr->tipo == 'email' ? 'selected' : ''}}>Email</option>
+                            <option value="geo" {{$qr->tipo == 'geo' ? 'selected' : ''}}>Geo</option>
+                            <option value="llamada" {{$qr->tipo == 'llamada' ? 'selected' : ''}}>Llamar</option>
+                            <option value="sms" {{$qr->tipo == 'sms' ? 'selected' : ''}}>SMS</option>
+                            <option value="wifi" {{$qr->tipo == 'wifi' ? 'selected' : ''}}>Wifi</option>
                         </x-select>
                     </div>
                     <div class="w-full">
                         <x-input-label for="url" :value="__('Link')" class="mt-2 mb-2" />
-                        <x-text-input id="url" class="block mt-1 w-full" type="text" name="url" :value="old('url')" required autofocus autocomplete="url" />
+                        <x-text-input id="url" class="block mt-1 w-full" type="text" name="url" :value="old('url')" value="{{$qr->links[0]->url ?? ''}}" required autofocus autocomplete="url" />
                         <x-input-error :messages="$errors->get('nombre')" class="mt-2" />
                     </div>
                 </div>
-                <x-input-checkbox id="isDinamico" name="isDinamico" label="¿Es Dinamico?" />
+                <x-input-checkbox id="isDinamico" name="isDinamico" label="¿Es Dinamico?" isChecked="{{$qr->isdinamico ? true : false }}" />
                 <div id="personalizacion-avanzada" class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm text-center py-1 my-2 px-3">
                     <div class="desplegable-avanzada">
                         <x-input-label :value="__('Personalizacion Avanzada')" class="mt-2 mb-2 " />
