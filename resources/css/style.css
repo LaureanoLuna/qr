@@ -15,10 +15,6 @@
     color: white;
 }
 
-.type {
-    display: flex;
-    justify-content: space-evenly;
-}
 
 #personalizacion-avanzada .desplegable-avanzada {
     display: flex;
@@ -39,17 +35,16 @@
     background-color: gray;
 }
 
-#config-avanzada-personalizacion {
-    padding-bottom: 10px;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 5px;
+#config-avanzada-personalizacion{
+    background-color: red;
+
 }
 
 #config-avanzada-personalizacion span input[type="text"],
 #selectEstilo {
     width: 100%;
 }
+
 
 #config-avanzada-personalizacion .inputTamanio {
     grid-column-start: 1;
@@ -60,13 +55,6 @@
     grid-column-end: 5;
 }
 
-
-#contentImgConf,
-#contentCheckTypeFondo {
-    grid-column-start: 1;
-    grid-column-end: 5;
-    padding: 5px 2px;
-}
 
 #checkTypeFondo {
     display: flex;
@@ -101,9 +89,7 @@
     background-color: white;
 }
 
-#content-color-qr {
-    grid-column-start: 1;
-    grid-column-end: 5;
+#content-color-qr > span {
     display: flex;
     justify-content: space-around;
     align-items: center;

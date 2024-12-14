@@ -112,10 +112,10 @@ class QrController extends Controller
             return $this->responseNotFound();
         }
 
-        /*  // Generar el código QR
+          // Generar el código QR
         $url = URL::current();
         $this->generateQrCode('http://localhost/qr/link/' . $qr->id, $qr->id);
-         */
+         
 
         // Retornar la vista con el QR y el código generado
         return view('qr.view', compact('qr'))->with('qrCode', QrCode::errorCorrection('H')->size(150)->generate($qr->links->first()->url));
@@ -163,7 +163,7 @@ class QrController extends Controller
             return $this->responseNotFound();
         }
 
-        return view('qr.edit', compact('qr'));
+        return view('qr.create', compact('qr'))->with('upt',true);
     }
 
     /**
@@ -226,5 +226,13 @@ class QrController extends Controller
         $link = $qr->links->first()->url;
 
         return Redirect::to($link);
+    }
+
+    public function qrStructure($qr) {
+        return QrCode::errorCorrection('H')
+        ->color($qr->color)
+        ->backgroundColor($qr)
+        ->size($qr->tamanio)
+        ->generate($qr->links->first()->url);
     }
 }
