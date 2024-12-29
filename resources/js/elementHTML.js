@@ -10,4 +10,7 @@ export const sectionDesplegablePersonalizacionAvanzada = document.querySelector(
 export const radioSelectTypeBackgroun =
     document.querySelector("#checkTypeFondo");
 
+export const formPreviewCreateQr = document.getElementById('formPrevQr');
+export const imgPreviewQr = document.getElementById('imgPrevCreate');
+
 

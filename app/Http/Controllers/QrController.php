@@ -4,9 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Qr;
 use App\Http\Controllers\LinkController;
-use App\Models\User;
+use DateTime;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 
 use Illuminate\Http\Request;
@@ -29,7 +28,8 @@ class QrController extends Controller
      */
     public function create()
     {
-        return view('qr.create');
+        $qr = new Qr();        
+        return view('qr.create')->with('qr',$qr);
     }
 
 
@@ -44,7 +44,7 @@ class QrController extends Controller
             ]);
 
 
-          /*   $request->validate([
+            /*   $request->validate([
                 'nombre' => 'required|string|max:255',
                 'isdinamico' => 'boolean',
                 'tipo' => 'required|string',
@@ -112,10 +112,10 @@ class QrController extends Controller
             return $this->responseNotFound();
         }
 
-          // Generar el código QR
+        // Generar el código QR
         $url = URL::current();
         $this->generateQrCode('http://localhost/qr/link/' . $qr->id, $qr->id);
-         
+
 
         // Retornar la vista con el QR y el código generado
         return view('qr.view', compact('qr'))->with('qrCode', QrCode::errorCorrection('H')->size(150)->generate($qr->links->first()->url));
@@ -163,7 +163,7 @@ class QrController extends Controller
             return $this->responseNotFound();
         }
 
-        return view('qr.create', compact('qr'))->with('upt',true);
+        return view('qr.create', compact('qr'))->with('upt', true);
     }
 
     /**
@@ -228,11 +228,46 @@ class QrController extends Controller
         return Redirect::to($link);
     }
 
-    public function qrStructure($qr) {
+    public function qrStructure($qr)
+    {
+        //dd($qr);
+        $color = $this->colorHexade($qr->color);
+        $fondo = $this->colorHexade($qr->fondo);
+        //dd($color);
+
         return QrCode::errorCorrection('H')
-        ->color($qr->color)
-        ->backgroundColor($qr)
-        ->size($qr->tamanio)
-        ->generate($qr->links->first()->url);
+            ->color($color[0],$color[1],$color[2])
+            ->backgroundColor($fondo[0],$fondo[1],$fondo[2])
+            ->size(50)
+            ->generate("carlos");
+    }
+
+    public function preview(Request $request){
+        $path = public_path('qr/temporal/'. $request->qr['nombre'] .'.png');
+        $pathRetorno = 'qr/temporal/'. $request->qr['nombre'] .'.png';
+
+        // Verificar si el directorio existe, si no, crearlo
+        if (!file_exists(dirname($path))) {
+            mkdir(dirname($path), 0755, true);
+        }
+
+        QrCode::format('png')
+            ->encoding('UTF-8')
+            ->errorCorrection('H')
+            ->size(200)
+            ->generate($request->qr['url'], $path);
+        
+        return json_encode($pathRetorno);
+    }
+
+    private function colorHexade($dato){
+
+        
+        $a = hexdec(substr($dato,1,2));
+        $b = hexdec(substr($dato,3,2));
+        $c = hexdec(substr($dato,5,2));
+        
+        //dd($dato);
+        return [$a,$b,$c];
     }
 }

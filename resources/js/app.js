@@ -1,5 +1,6 @@
 import "./bootstrap";
 import indexJs from "./index";
+import {} from "./prevCreateQr";
 
 import Alpine from "alpinejs";
 
